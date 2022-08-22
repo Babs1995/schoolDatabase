@@ -1,6 +1,7 @@
 // followed exercise for REST API auth Express
 "use strict";
 const { Model, DataTypes } = require("sequelize");
+const bcrypt = require('bcrypt');
 module.exports = (sequelize) => {
   class User extends Model {}
   User.init(
@@ -45,12 +46,16 @@ module.exports = (sequelize) => {
         validate: {
           notEmpty: {
             msg: "Password cannot be empty"
-          }
-        }
+          },
+        },
+        set(val) {
+          const hashedPassword = bcrypt.hashSync(val, 10);
+          if(val){
+            this.setDataValue('password', hashedPassword);
+          };
+        },
       },
-    },
-    { sequelize }
-  );
+    }, { sequelize });
 //   userId (created in the model associations with the foreignKey property, and equals the id from the Courses table)
   User.associate = (models) => {
     User.hasMany(models.Course, {

@@ -3,6 +3,8 @@
 // load modules
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
+
 // got code from Connecting to a database Instructions on https://sequelize.org/docs/v6/getting-started/
 const Sequelize = require("sequelize");
 const user = require("./routes/users")
@@ -46,6 +48,8 @@ const sequelize = new Sequelize({
 
 // necessary for morgan for http request logging
 app.use(morgan("dev"));
+
+app.use(cors());
 
 // human readable message for root routes
 app.get("/", (req, res) => {

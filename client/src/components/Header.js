@@ -24,10 +24,6 @@ return (
             ) : (
               <React.Fragment>
                 <li>
-                {/* <li><NavLink exact to="/">Home</NavLink></li>
-                <li><NavLink to="/about">About</NavLink></li>
-                <li><NavLink to="/teachers">Teachers</NavLink></li> */}
-                {/* <li><NavLink to="/courses">Courses</NavLink></li> */}
                   <NavLink to="/signup">Sign Up</NavLink>
                 </li>
                 <li className="header--signedin">
