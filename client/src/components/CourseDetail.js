@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown'
 import { Buffer } from "buffer";
@@ -16,7 +16,7 @@ export default function CourseDetail( {context}) {
             fetch(`http://localhost:5000/api/courses/${id}`)
             .then ((response) => response.json())
             .then ((data) => setCourse(data.courses))
-            .catch(err => console.log('Oh no!', err))
+            .catch(err => console.log('Oh no! Error. Beep. Beep.', err))
         }
             fetchData();
         });
