@@ -14,22 +14,22 @@ export default function Courses() {
         setData(response);
       })
       .catch((error) => {
-          throw error;
+        throw error;
       }); // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
+  }, []);
 
   if (data.length) {
     courses = data.map((course, index) => (
       <Link
         className="course--module course--link"
         key={index}
-        to={`/courses/${course.id}`}>
+        to={`/courses/${course.id}`}
+      >
         <h2 className="course--label">Course</h2>
         <h3 className="course--title">{course.title}</h3>
       </Link>
     ));
   }
-
 
   return (
     <main>
@@ -38,7 +38,8 @@ export default function Courses() {
         {/* Button to create a course. */}
         <Link
           className="course--module course--add--module"
-          to="/courses/create">
+          to="/courses/create"
+        >
           <span className="course--add--title">
             <svg
               version="1.1"
@@ -46,8 +47,10 @@ export default function Courses() {
               x="0px"
               y="0px"
               viewBox="0 0 13 13"
-              className="add">
-              <polygon points="7,6 7,0 6,0 6,6 0,6 0,7 6,7 6,13 7,13 7,7 13,7 13,6 "></polygon></svg>
+              className="add"
+            >
+              <polygon points="7,6 7,0 6,0 6,6 0,6 0,7 6,7 6,13 7,13 7,7 13,7 13,6 "></polygon>
+            </svg>
             New Course
           </span>
         </Link>

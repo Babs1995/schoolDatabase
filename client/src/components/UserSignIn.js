@@ -10,11 +10,8 @@ export default class UserSignIn extends Component {
   };
 
   render() {
-    const { emailAddress, 
-      password, 
-      errors 
-     } = this.state;
-     return (
+    const { emailAddress, password, errors } = this.state;
+    return (
       <main>
         <div className="form--centered">
           <h2>Sign In</h2>
@@ -52,42 +49,37 @@ export default class UserSignIn extends Component {
       </main>
     );
   }
-    change = (event) => {
-      const name = event.target.name;
-      const value = event.target.value;
+  change = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
 
-      this.setState(() => {
-        return {
-          [name]: value,
-        };
-      });
-    };
-
-    submit = () => {
-      const { context } = this.props;
-      const { from } = this.props.location.state || {
-        from: { pathname: "/courses" },
+    this.setState(() => {
+      return {
+        [name]: value,
       };
-      const { emailAddress, password } = this.state;
-      context.actions
-        .signIn(emailAddress, password)
-        .then((user) => {
-          if (user === null) {
-            this.setState(() => {
-              return { errors: ["Sign-in was unsuccessful. Try again!"] };
-            });
-          } else {
-            this.props.history.push(from);
-          }
-        })
-        .catch((err) => {
-          this.props.history.push("/error");
-        });
-    };
+    });
+  };
 
-    cancel = () => {
-      this.props.history.push("/");
-    }; 
+  submit = () => {
+    const { context } = this.props;
+    const { emailAddress, password } = this.state;
+    context.actions
+      .signIn(emailAddress, password)
+      .then((user) => {
+        if (user === null) {
+          this.setState(() => {
+            return { errors: ["Sign-in was unsuccessful. Try again!"] };
+          });
+        } else {
+          this.props.history.push('/');
+        }
+      })
+      .catch((err) => {
+        this.props.history.push("/error");
+      });
+  };
+
+  cancel = () => {
+    this.props.history.push("/");
+  };
 }
-
-

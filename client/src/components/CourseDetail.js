@@ -44,7 +44,7 @@ export default function CourseDetail() {
                 <Link className="button" to={`/courses/${id}/updated`}>
                   Update Course
                 </Link>
-                <Link className="button" to="/courses/" onClick={deleteACourse}>
+                <Link className="button" to="/courses/" onClick={deleteCourse}>
                   Delete Course
                 </Link>
                 <Link className="button button-secondary" to="/courses">
@@ -95,7 +95,7 @@ export default function CourseDetail() {
   //**  HELPER FUNCTION **//
   // Deletes a course when the button is pressed IF
   // the user is authenticated and the owner of the course.
-  function deleteACourse() {
+  function deleteCourse() {
     fetch(`http://localhost:5000/api/courses/${id}`, {
       method: "DELETE",
       headers: {

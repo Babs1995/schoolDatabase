@@ -1,5 +1,5 @@
 import { Buffer } from "buffer";
-// import { CSSCourses } from "data"; 
+// import { CSSCourses } from "data";
 
 export default class Data {
   api(
