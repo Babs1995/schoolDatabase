@@ -2,8 +2,9 @@ import React from 'react';
 import {
   BrowserRouter,
   Route,
-  Switch
+  Routes
 } from 'react-router-dom';
+import "./index.css"
 import Header from './components/Header';
 import Courses from './components/Courses';
 import CreateCourse from './components/CreateCourse';
@@ -32,7 +33,7 @@ export default function App() {
     <BrowserRouter>
       <HeaderWithContext />
 
-      <Switch>
+      <Routes>
         <Route exact path='/' component={Courses} />
         <Route exact path='/courses' component={Courses} />
         <PrivateRoute path="/courses/create" component={CreateCourseWithContext} />
@@ -45,7 +46,7 @@ export default function App() {
         <Route path='/forbidden' component={Forbidden} />
         <Route component={NotFound} />
         
-      </Switch>
+      </Routes>
     </BrowserRouter>
   );
 }
