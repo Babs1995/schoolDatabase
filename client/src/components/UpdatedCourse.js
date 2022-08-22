@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { Buffer } from 'buffer';
 import Form from './Form';
 import Forbidden from './Forbidden';
 
 export default function UpdatedCourse({context}) {
 
-    const history = useNavigate();
+    const history = useHistory();
     const [course, setCourse] = useState('');
     const [description, setDescription] = useState('');
     const [materialsNeeded, setMaterialsNeeded] = useState('');

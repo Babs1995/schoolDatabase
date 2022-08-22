@@ -1,71 +1,83 @@
-// followed exercise for REST API auth Express
-"use strict";
-const { Model, DataTypes } = require("sequelize");
+'use strict';
+
+const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
+
 module.exports = (sequelize) => {
   class User extends Model {}
-  User.init(
-    {
-      firstName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: {
-            msg: "Looks like you're missing a first name..."
-          }
-        }
+  User.init({
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
       },
-      lastName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: {
-            msg: "Looks like you're missing a last name..."
-          }
-        }
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'A first name is required',
+        },
+        notEmpty: {
+          msg: 'Please provide a first name',
+        },
       },
-      emailAddress: {
+    },
+    lastName:  {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
+          notNull: {
+            msg: 'A last name is required',
+          },
           notEmpty: {
-            msg: "Did you forget your email?"
+            msg: 'Please provide a last name',
+          },
+        },
+      },
+      emailAddress:  {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: {
+            msg: 'The email you entered already exists'
+        },
+        validate: {
+          notNull: {
+            msg: 'An email is required',
           },
           isEmail: {
-            msg: "Oh, no! Please enter a valid email."
-          }
-        },
-        unique: {
-          msg: "The email you entered is already in our database. Try another one!"
-        },
-        
-      },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: {
-            msg: "Password cannot be empty"
+            msg: 'Please provide a valid email address',
           },
         },
-        set(val) {
-          const hashedPassword = bcrypt.hashSync(val, 10);
-          if(val){
-            this.setDataValue('password', hashedPassword);
-          };
+      },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'A password is required',
+        },
+        notEmpty: {
+          msg: 'Please provide a password',
         },
       },
-    }, { sequelize });
-//   userId (created in the model associations with the foreignKey property, and equals the id from the Courses table)
-  User.associate = (models) => {
-    User.hasMany(models.Course, {
-        // creating alias
-      as: "user",
-      foreignKey: {
-        fieldName: "userId",
-        allowNull: false,
+      set(val) {
+        const hashedPassword = bcrypt.hashSync(val, 10);
+        if(val){
+          this.setDataValue('password', hashedPassword);
+        };
       },
+    },
+  }, { sequelize });
+
+  User.associate = (models) => {
+    User.hasMany(models.Courses, { 
+        foreignKey: {
+            fieldName: 'userId',
+            allowNull: false,
+        },
     });
   };
+
   return User;
 };

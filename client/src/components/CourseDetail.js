@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { Buffer } from "buffer";
 
 export default function CourseDetail() {
-  let history = useNavigate();
+  let history = useHistory();
   // eslint-disable-next-line no-use-before-define
   const context = useContext({ context });
   const [course, setCourse] = useState([]);

@@ -15,8 +15,8 @@ export default function Courses() {
       })
       .catch((error) => {
           throw error;
-      });
-  });
+      }); // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   if (data.length) {
     courses = data.map((course, index) => (
