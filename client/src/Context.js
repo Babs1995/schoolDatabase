@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import Data from "./Data";
-import Cookies from "js-cookie";
 
 export const Context = React.createContext();
+export class Provider extends Component {
+  state = {
+    authUSer: null,
+    password: "",
+    course: [],
+  };
 
-export const Provider = (props) => {
-  const data = new Data();
-  const cookie = Cookies.get("auth-user");
+  constructor() {
+    super();
+    this.data = new Data();
+  }
 
-  const [authUser] = useState(cookie ? JSON.parse(cookie) : null);
-  const [auth] = useState(authUser ? true : false);
-
-  const signIn = async (emailAddress, password) => {
+  signIn = async (emailAddress, password) => {
     const user = await this.data.getUser(emailAddress, password);
     if (user !== null) {
       user.password = password;
@@ -20,32 +23,31 @@ export const Provider = (props) => {
           authUser: user,
         };
       });
-      Cookies.set("auth-user", JSON.stringify(user), { expires: 1 });
     }
     return user;
   };
 
-  const signOut = () => {
-    this.setState(() => {
-      return {
-        authUser: null,
-      };
-    });
-    Cookies.remove("auth-user");
+  signOut = () => {
+    this.setState({ authUser: null });
   };
+  render() {
+    const { authUser } = this.state;
 
-  const value = {
-    authUser,
-    auth,
-    data,
-    actions: {
-      signIn,
-      signOut,
-    },
-  };
+    const value = {
+      authUser,
+      auth: this.authUser,
+      data: this.data,
+      actions: {
+        signIn: this.signIn,
+        signOut: this.signOut,
+      },
+    };
 
-  return <Context.Provider value={value}>{props.children}</Context.Provider>;
-};
+    return (
+      <Context.Provider value={value}>{this.props.children}</Context.Provider>
+    );
+  }
+}
 
 export const Consumer = Context.Consumer;
 
