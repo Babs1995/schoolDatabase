@@ -30,9 +30,6 @@ function Header() {
                 <li className="header--signedin">
                   <NavLink to="/signin">Sign In</NavLink>
                 </li>
-                <li className="header--signedout">
-                  <NavLink to="/signout">Sign Out</NavLink>
-                </li>
               </React.Fragment>
             )}
           </ul>

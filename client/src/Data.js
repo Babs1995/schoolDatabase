@@ -110,7 +110,7 @@ export default class Data {
     }
   }
 
-  async deleteCourse(id, emailAddress, password) {
+  async deleteACourse(id, emailAddress, password) {
     const response = await this.api(`/courses/${id}`, "DELETE", true, {
       emailAddress,
       password,

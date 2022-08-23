@@ -102,7 +102,7 @@ router.get(
 );
 
 router.post(
-  "/courses",
+  "/courses/create",
   authUser,
   asyncHandler(async (req, res) => {
     const user = req.currentUser;
