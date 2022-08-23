@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
-const express = require('express');
-const auth = require('basic-auth');
-const { authUser } = require('./middleware/auth-user');
-const { asyncHandler } = require('./middleware/asyncHandler');
-const { User, Courses } = require('./models');
+const express = require("express");
+const auth = require("basic-auth");
+const { authUser } = require("./middleware/auth-user");
+const { asyncHandler } = require("./middleware/asyncHandler");
+const { User, Courses } = require("./models");
 const router = express.Router();
 
 router.get(
@@ -14,7 +14,7 @@ router.get(
     const user = req.currentUser;
     const userInfo = user.dataValues;
     const userInfoShared = Object.keys(userInfo)
-      .slice(1, 4)
+      .slice(0, 4)
       .reduce((obj, key) => {
         return Object.assign(obj, {
           [key]: user[key],
@@ -64,14 +64,16 @@ router.get(
   asyncHandler(async (req, res) => {
     const courses = await Courses.findAll({
       attributes: {
-        exclude: ['createdAt', 'updatedAt', 'userId']
+        exclude: ["createdAt", "updatedAt", "userId"],
       },
-      include:[{
-        model: User,
-        attributes: {
-          exclude:['createdAt', 'updatedAt', 'password']
-        }
-      }]
+      include: [
+        {
+          model: User,
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "password"],
+          },
+        },
+      ],
     });
     console.log(courses.map((course) => course.get()));
     res.json(courses).status(200);
@@ -82,12 +84,14 @@ router.get(
   "/courses/:id",
   asyncHandler(async (req, res) => {
     const course = await Courses.findByPk(req.params.id, {
-      include:[{
-        model: User,
-        attributes: {
-          exclude:['createdAt', 'updatedAt', 'password']
-        }
-      }]
+      include: [
+        {
+          model: User,
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "password"],
+          },
+        },
+      ],
     });
     if (course) {
       const courseInfo = course.dataValues;
