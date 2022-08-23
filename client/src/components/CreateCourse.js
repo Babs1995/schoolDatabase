@@ -14,22 +14,44 @@ export default function CreateCourse() {
   const [materialsNeeded, setMaterialsNeeded] = useState("");
   const [errors, setErrors] = useState([]);
 
+
   const cancel = () => {
     history.push("/courses");
   };
+const change = (event) => {
+  const value = event.target.value;
+  switch(event.target.name) {
+    case"title":
+    setTitle(value);
+    break;
+    case"description":
+    setDescription(value);
+    break;
+    case"estimatedTime":
+    setEstimatedTime(value);
+    break;
+    case"materialsNeeded":
+    setMaterialsNeeded(value);
+    break;
+    default:
+      return;
+  }
+}
 
   const submit = () => {
+    const userId = authUser.id
+    console.log(authUser);
     const course = {
       title,
       description,
       estimatedTime,
       materialsNeeded,
-      userId: context.authUser.id,
+      userId
     };
     const emailAddress = authUser.emailAddress ;
     const password = authUser.password;
     context.data.createCourse(course, emailAddress, password)
-    .then((res)=> {console.log(res)})
+    .then((res)=> {console.log(res.data)})
     
   }
     //   const body = JSON.stringify(course);
@@ -72,22 +94,22 @@ export default function CreateCourse() {
     //   }
     // }
 
-    const change = (event) => {
-      const name = event.target.name;
-      const value = event.target.value;
-      if (name === "title") {
-        setTitle(value);
-        // console.log(setTitle);
-      } else if (name === "description") {
-        setDescription(value);
-      } else if (name === "estimatedTime") {
-        setEstimatedTime(value);
-      } else if (name === "materialsNeeded") {
-        setMaterialsNeeded(value);
-      } else {
-        return;
-      }
-    };
+    // const change = (event) => {
+    //   const name = event.target.name;
+    //   const value = event.target.value;
+    //   if (name === "title") {
+    //     setTitle(value);
+    //     // console.log(setTitle);
+    //   } else if (name === "description") {
+    //     setDescription(value);
+    //   } else if (name === "estimatedTime") {
+    //     setEstimatedTime(value);
+    //   } else if (name === "materialsNeeded") {
+    //     setMaterialsNeeded(value);
+    //   } else {
+    //     return;
+    //   }
+    // };
 
     return (
       <main>
