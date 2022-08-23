@@ -9,14 +9,14 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         <Route
           {...rest}
           render={(props) =>
-            context.auth ? (
+            context.authUser ? (
               <Component {...props} />
             ) : (
               <Redirect 
               // Use the <Route> component's render property to define a function that renders the component associated with the private route
                 to={{
                   pathname: "/signin",
-                  state: { from: props.location },
+                  state: { from: props.location }
                 }}
               />
             )
