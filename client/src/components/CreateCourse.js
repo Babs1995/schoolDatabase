@@ -34,11 +34,12 @@ const change = (event) => {
     setMaterialsNeeded(value);
     break;
     default:
-      return;
+      return; 
   }
 }
 
   const submit = () => {
+    history.push("/");
     const userId = authUser.id
     console.log(authUser);
     const course = {
