@@ -85,7 +85,6 @@ export default function UpdatedCourse({ context }) {
     const name = event.target.name;
     const value = event.target.value;
     if (name === "courseTitle") {
-      // setCourse(value);
       setTitle(value)
     } else if (name === "courseDescription") {
       setDescription(value);
