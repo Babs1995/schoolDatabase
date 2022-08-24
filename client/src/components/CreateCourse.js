@@ -1,7 +1,6 @@
 // This component provides the "Create Course" screen by rendering a form that allows a user to create a new course. The component also renders a "Create Course" button that when clicked sends a POST request to the REST API's /api/courses route.
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { Buffer } from "buffer";
 import { Context } from "../Context";
 import Form from "./Form";
 
@@ -39,9 +38,8 @@ export default function CreateCourse() {
   };
 
   const submit = () => {
-    history.push("/");
+    // history.push("/");
     const userId = authUser.id;
-    console.log(authUser);
     const course = {
       title,
       description,
@@ -51,11 +49,19 @@ export default function CreateCourse() {
     };
     const emailAddress = authUser.emailAddress;
     const password = authUser.password;
-    context.data.createCourse(course, emailAddress, password).then((res) => {
-      console.log(res.data);
-    });
+    context.data.createCourse(course, emailAddress, password)
+      .then(errors => {
+        if(errors.length) {
+          setErrors(errors)
+        } else {
+          history.push("/")
+        }
+    })
+    .catch(error => { 
+      throw error
+      // history.push("/")
+    })
   };
-
   // Jazmin supported with restructuring of this page after failed multiple attempts
   return (
     <main>
