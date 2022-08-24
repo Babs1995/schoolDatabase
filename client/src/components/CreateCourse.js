@@ -111,7 +111,8 @@ const change = (event) => {
     //     return;
     //   }
     // };
-
+ 
+// Jazmin supported with restructuring of this page after failed multiple attempts 
     return (
       <main>
         <div className="wrap">

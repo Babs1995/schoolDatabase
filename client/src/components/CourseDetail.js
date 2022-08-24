@@ -38,11 +38,11 @@ export default function CourseDetail() {
                 <div className="actions--bar">
                     <div className="wrap">
                         {(context.authUser && course.user) ?
-                            (context.authUSer.id===course.user.id) ?
+                            (context.authUser.id===course.User.id) ?
                                 <React.Fragment>
                                     <Link className="button" to={`/courses/${id}/updated`}>Update Course</Link>
                                     <Link className="button" to='/courses/' onClick={deleteACourse}>Delete Course</Link>
-                                    <Link className="button button-secondary" to="/courses">Return to List</Link>
+                                    <button className="button button-secondary" to="/courses">Return to List</button>
                                 </React.Fragment>
                             : 
                             <Link className="button button-secondary" to="/courses">Return to List</Link>
@@ -59,9 +59,9 @@ export default function CourseDetail() {
                             <div>
                                 <h3 className="course--detail--title">Course</h3>
                                 <h4 className="course--name">{course.title}</h4>
-                                {course.user && 
+                                {course.User && 
                                     (<p>
-                                        By {course.user.firstName} {course.user.lastName}
+                                        By {course.User.firstName} {course.User.lastName}
                                     </p>
                                 )}
                                 <ReactMarkdown>{course.description}</ReactMarkdown>
