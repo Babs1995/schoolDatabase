@@ -40,9 +40,7 @@ export default function App() {
           path="/courses/create"
           component={CreateCourseWithContext}
         />
-        <PrivateRoute
-          path="/courses/:id/update"
-          component={UpdateCourseWithContext}/>
+        <PrivateRoute path="/courses/:id/update" component={UpdateCourseWithContext}/>
         <Route exact path="/courses/:id" component={CourseDetail} />
         <Route path="/signin" component={UserSignInWithContext} />
         <Route path="/signup" component={UserSignUpWithContext} />

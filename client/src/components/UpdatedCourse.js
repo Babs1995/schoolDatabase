@@ -47,13 +47,23 @@ export default function UpdatedCourse({ context }) {
       description,
       materialsNeeded,
       
-      userId: context.authUser.id
+      userId: context.authUser.id,
     };
 
     const body = JSON.stringify(updatedCourse);
 
     let newErrors = [];
-   
+    // if (!course || !description) {
+    //   if (!course) {
+    //     newErrors.push(['Provide a valid value for "Course".']);
+    //     setErrors(newErrors);
+    //   }
+    //   if (!description) {
+    //     newErrors.push(['Provide a valid value for "Description".']);
+    //     setErrors(newErrors);
+    //   }
+    // } else 
+    {
       fetch(`http://localhost:5000/api/courses/${id}`, {
         method: "PUT",
         headers: {
@@ -61,8 +71,8 @@ export default function UpdatedCourse({ context }) {
           Authorization:
             "Basic " +
             Buffer.from(
-              `${context.authUser.id}:${
-                context.authUser.id
+              `${context.authUser.emailAddress}:${
+                context.authUser.password
               }`
             ).toString("base64"),
         },
@@ -78,6 +88,7 @@ export default function UpdatedCourse({ context }) {
           throw new Error();
         }
       });
+    }
   }
 
   function change(event) {
