@@ -1,3 +1,4 @@
+// This component provides the "Course Detail" screen by retrieving the detail for a course from the REST API's /api/courses/:id route and rendering the course. The component also renders a "Delete Course" button that when clicked should send a DELETE request to the REST API's /api/courses/:id route in order to delete a course. 
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown'
@@ -37,18 +38,17 @@ export default function CourseDetail() {
             {/* Update the "Sign Up", "Create Course", and "Update Course" screens to display validation errors returned from the REST API. */}
                 <div className="actions--bar">
                     <div className="wrap">
-                        {(context.authUser && course.user) ?
-                            (context.authUser.id===course.User.id) ?
+                        { context.authUser ? (
+                              
                                 <React.Fragment>
-                                    <Link className="button" to={`/courses/${id}/updated`}>Update Course</Link>
+                                    <Link className="button" to={`/courses/${id}/update`}>Update Course</Link>
                                     <Link className="button" to='/courses/' onClick={deleteACourse}>Delete Course</Link>
                                     <button className="button button-secondary" to="/courses">Return to List</button>
                                 </React.Fragment>
-                            : 
+                         ) : (
                             <Link className="button button-secondary" to="/courses">Return to List</Link>
-                        :
-                        <Link className="button button-secondary" to="/courses">Return to List</Link>
-                        }
+                        
+                      ) }
                     </div>
                 </div>
             {/* Displays the information about the course. */}

@@ -1,3 +1,4 @@
+// This component provides the "Update Course" screen by rendering a form that allows a user to update one of their existing courses.
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { Buffer } from "buffer";
@@ -6,7 +7,8 @@ import Forbidden from "./Forbidden";
 
 export default function UpdatedCourse({ context }) {
   const history = useHistory();
-  const [course, setCourse] = useState("");
+  const [course, setCourse] = useState();
+  const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [materialsNeeded, setMaterialsNeeded] = useState("");
   const [errors, setErrors] = useState([]);
@@ -19,9 +21,12 @@ export default function UpdatedCourse({ context }) {
         const response = await fetch(`http://localhost:5000/api/courses/${id}`);
         if (response.status === 200) {
           const json = await response.json();
+          console.log(response.json());
           setCourse(json.course);
+          setTitle(json.title)
           setDescription(json.description);
-          setUser(json.user);
+          setMaterialsNeeded(json.materialsNeeded)
+          setUser(json.User);
         } else if (response.status === 500) {
           history.push("/error");
         } else {
@@ -86,7 +91,7 @@ export default function UpdatedCourse({ context }) {
   function change(event) {
     const name = event.target.name;
     const value = event.target.value;
-    if (name === "courseCourse") {
+    if (name === "courseTitle") {
       setCourse(value);
     } else if (name === "courseDescription") {
       setDescription(value);
@@ -99,7 +104,7 @@ export default function UpdatedCourse({ context }) {
 
   return (
     <main>
-      {user && user.id === context.auth - user.id ? (
+      {/* {user && user.id === context.authUser.id ? ( */}
         <React.Fragment>
           <div className="wrap">
             <h2>Update Course</h2>
@@ -117,14 +122,14 @@ export default function UpdatedCourse({ context }) {
                         id="courseCourse"
                         name="courseCourse"
                         type="text"
-                        value={course}
+                        value={title}
                         onChange={change}
                       />
-                      {user && (
+                      {/* {user && ( */}
                         <p>
-                          By {user.firstName} {user.lastName}
+                        {/* By {User.firstName}  */}
                         </p>
-                      )}
+                      {/* )} */}
                       <label htmlFor="courseDescription">
                         Course Description
                       </label>
@@ -147,13 +152,14 @@ export default function UpdatedCourse({ context }) {
                     </div>
                   </div>
                 </React.Fragment>
-              )}
+              )
+              }
             />
           </div>
         </React.Fragment>
-      ) : (
+      {/* ) : ( */}
         <Forbidden />
-      )}
+      {/* )} */}
     </main>
   );
 }

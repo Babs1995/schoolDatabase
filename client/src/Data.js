@@ -88,7 +88,6 @@ export default class Data {
     });
     if (response.status === 201) {
       return response.json().then(data => data);
-      console.log("success");
     } else if (response.status === 400) {
       return response.json().then((data) => {
         return data.errors;

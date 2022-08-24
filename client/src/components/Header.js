@@ -1,3 +1,4 @@
+// Displays the top menu bar for the application and includes buttons for signing in and signing up or the user's name and a button for signing out
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { Context } from "../Context";

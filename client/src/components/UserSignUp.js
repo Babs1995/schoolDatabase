@@ -1,3 +1,4 @@
+// This component provides the "Sign Up" screen by rendering a form that allows a user to sign up by creating a new account. The component also renders a "Sign Up" button that when clicked sends a POST request to the REST API's /api/users route and signs in the user. 
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Form from "./Form";

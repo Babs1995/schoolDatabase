@@ -1,3 +1,4 @@
+// This component provides the "Sign In" screen by rendering a form that allows a user to sign in using their existing account information. 
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Form from "./Form";
