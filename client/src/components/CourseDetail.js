@@ -38,7 +38,7 @@ export default function CourseDetail() {
             {/* Update the "Sign Up", "Create Course", and "Update Course" screens to display validation errors returned from the REST API. */}
                 <div className="actions--bar">
                     <div className="wrap">
-                        { context.authUser ? (
+                    {context.authUser && context.authUser.id === course.User?.id ? (
                               
                                 <React.Fragment>
                                     <Link className="button" to={`/courses/${id}/update`}>Update Course</Link>

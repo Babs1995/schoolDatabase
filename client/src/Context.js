@@ -49,10 +49,6 @@ export class Provider extends Component {
   signOut = () => {
     this.setState({ authUser: null });
   };
-  //   return (
-  //     <Context.Provider value={value}>{this.props.children}</Context.Provider>
-  //   );
-  // }
 }
 
 export const Consumer = Context.Consumer;
