@@ -47,22 +47,13 @@ export default function UpdatedCourse({ context }) {
       description,
       materialsNeeded,
       
-      userId: context.auth - user.id,
+      userId: context.authUser.id
     };
 
     const body = JSON.stringify(updatedCourse);
 
     let newErrors = [];
-    if (!course || !description) {
-      if (!course) {
-        newErrors.push(['Provide a valid value for "Course".']);
-        setErrors(newErrors);
-      }
-      if (!description) {
-        newErrors.push(['Provide a valid value for "Description".']);
-        setErrors(newErrors);
-      }
-    } else {
+   
       fetch(`http://localhost:5000/api/courses/${id}`, {
         method: "PUT",
         headers: {
@@ -70,8 +61,8 @@ export default function UpdatedCourse({ context }) {
           Authorization:
             "Basic " +
             Buffer.from(
-              `${context.auth - user.emailAddress}:${
-                context.auth - user.password
+              `${context.authUser.id}:${
+                context.authUser.id
               }`
             ).toString("base64"),
         },
@@ -87,7 +78,6 @@ export default function UpdatedCourse({ context }) {
           throw new Error();
         }
       });
-    }
   }
 
   function change(event) {
@@ -130,7 +120,7 @@ export default function UpdatedCourse({ context }) {
                       />
                       {/* {user && ( */}
                         <p>
-                        {/* By {User.firstName}  */}
+                        By {user.firstName} 
                         </p>
                       {/* )} */}
                       <label htmlFor="courseDescription">
