@@ -43,8 +43,10 @@ export default function UpdatedCourse({ context }) {
   function submit() {
     const updatedCourse = {
       course,
+      title,
       description,
       materialsNeeded,
+      
       userId: context.auth - user.id,
     };
 
@@ -92,7 +94,8 @@ export default function UpdatedCourse({ context }) {
     const name = event.target.name;
     const value = event.target.value;
     if (name === "courseTitle") {
-      setCourse(value);
+      // setCourse(value);
+      setTitle(value)
     } else if (name === "courseDescription") {
       setDescription(value);
     } else if (name === "materialsNeeded") {
@@ -117,10 +120,10 @@ export default function UpdatedCourse({ context }) {
                 <React.Fragment>
                   <div className="main--flex">
                     <div>
-                      <label htmlFor="courseCourse">Course Title</label>
+                      <label htmlFor="courseTitle">Course Title</label>
                       <input
-                        id="courseCourse"
-                        name="courseCourse"
+                        id="courseTitle"
+                        name="courseTitle"
                         type="text"
                         value={title}
                         onChange={change}
