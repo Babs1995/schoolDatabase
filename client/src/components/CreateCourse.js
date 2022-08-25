@@ -17,6 +17,7 @@ export default function CreateCourse() {
   const cancel = () => {
     history.push("/courses");
   };
+  // sets the value of  each component of a course
   const change = (event) => {
     const value = event.target.value;
     switch (event.target.name) {
@@ -36,9 +37,8 @@ export default function CreateCourse() {
         return;
     }
   };
-
+// changes can be made as long as authorized user is signed in
   const submit = () => {
-    // history.push("/");
     const userId = authUser.id;
     const course = {
       title,
@@ -59,10 +59,9 @@ export default function CreateCourse() {
     })
     .catch(error => { 
       throw error
-      // history.push("/")
     })
   };
-  // Jazmin supported with restructuring of this page after failed multiple attempts
+  // Jazmin supported with restructuring of this page after multiple adjustments that did not render as the page should 
   return (
     <main>
       <div className="wrap">

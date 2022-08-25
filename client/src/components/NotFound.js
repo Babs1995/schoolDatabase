@@ -1,3 +1,4 @@
+// page that renders when page is not found
 import React from "react";
 
 export default function NotFound() {

@@ -10,6 +10,7 @@ export default class UserSignIn extends Component {
     errors: [],
   };
 
+  // when user visits page, they will be prompted to either sing in or sign up 
   render() {
     const { emailAddress, password, errors } = this.state;
     return (
@@ -60,7 +61,7 @@ export default class UserSignIn extends Component {
       };
     });
   };
-
+// validation for valid account is set up 
   submit = () => {
     const { context } = this.props;
     const { emailAddress, password } = this.state;

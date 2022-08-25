@@ -7,7 +7,7 @@ export default function Courses() {
   const context = useContext(Context);
   const [data, setData] = useState([]);
   let courses;
-
+// the effect of get courses runs getting from context 
   useEffect(() => {
     context.data
       .getCourses()
@@ -18,7 +18,7 @@ export default function Courses() {
         throw error;
       }); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+// gives a list of the courses and titles 
   if (data.length) {
     courses = data.map((course, index) => (
       <Link
@@ -31,7 +31,7 @@ export default function Courses() {
       </Link>
     ));
   }
-
+// button allows for creation of a course in html 
   return (
     <main>
       <div className="wrap main--grid">

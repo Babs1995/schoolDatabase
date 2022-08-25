@@ -11,7 +11,7 @@ export default class UserSignUp extends Component {
     password: "",
     errors: [],
   };
-
+// listed needed components for successful sign in 
   render() {
     const { firstName, lastName, emailAddress, password, errors } = this.state;
 

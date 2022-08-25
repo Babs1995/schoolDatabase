@@ -92,7 +92,6 @@ export default function CourseDetail() {
         })
         .then( response => {
             if (response.status === 204) {
-                console.log("Course was deleted!");
                 history.push("/")
             } else if (response.status === 400){
                 response.json().then(data => {

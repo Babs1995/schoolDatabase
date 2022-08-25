@@ -1,5 +1,5 @@
 import React from "react";
-
+// page that renders during authorized action
 export default function Forbidden() {
   return (
     <main>

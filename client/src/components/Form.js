@@ -13,7 +13,7 @@ export default (props) => {
     event.preventDefault();
     cancel();
   }
-
+// validation errors display when missing necessary components
   return (
     <div>
       <ErrorsDisplay errors={errors} />
@@ -33,7 +33,6 @@ export default (props) => {
 };
 function ErrorsDisplay({ errors }) {
   let errorsDisplay = null;
-
   if (errors.length) {
     errorsDisplay = (
       <div>

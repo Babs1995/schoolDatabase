@@ -1,5 +1,5 @@
 import React from "react";
-
+// page that renders when there is an error 
 export default function Error() {
   return (
     <main>
