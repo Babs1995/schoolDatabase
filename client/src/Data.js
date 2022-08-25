@@ -70,7 +70,7 @@ export default class Data {
   }
 
   async getCourse(id) {
-    const response = await this.api(`/courses/${id}`, "GET", null, true);
+    const response = await this.api(`/courses/${id}`, "GET", null, false);
     if (response.status === 200) {
       return response.json().then((data) => data);
     } else if (response.status === 401) {
@@ -99,8 +99,8 @@ export default class Data {
     }
   }
 
-  async updatedCourse(id, course) {
-    const response = await this.api(`/courses/${id}`, "PUT", course);
+  async updatedCourse(id, course, emailAddress, password) {
+    const response = await this.api(`/courses/${id}`, "PUT", course, true, {emailAddress, password});
     if (response.status === 204) {
       return [];
     } else if (response.status === 400) {
