@@ -42,8 +42,8 @@ export default function CourseDetail() {
                               
                                 <React.Fragment>
                                     <Link className="button" to={`/courses/${id}/update`}>Update Course</Link>
-                                    <Link className="button" to='/courses/' onClick={deleteACourse}>Delete Course</Link>
-                                    <button className="button button-secondary" to="/courses">Return to List</button>
+                                    <button className="button" to='/courses/' onClick={deleteACourse}>Delete Course</button>
+                                    <Link className="button button-secondary" to="/courses">Return to List</Link>
                                 </React.Fragment>
                          ) : (
                             <Link className="button button-secondary" to="/courses">Return to List</Link>
@@ -93,6 +93,7 @@ export default function CourseDetail() {
         .then( response => {
             if (response.status === 204) {
                 console.log("Course was deleted!");
+                history.push("/")
             } else if (response.status === 400){
                 response.json().then(data => {
                     return data.errors;

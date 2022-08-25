@@ -12,7 +12,7 @@ export default function UpdatedCourse({ context }) {
   const [description, setDescription] = useState("");
   const [materialsNeeded, setMaterialsNeeded] = useState("");
   const [estimatedTime, setEstimatedTime] = useState("");
-  const [errors] = useState([]);
+  const [errors, setErrors] = useState([]);
   const [user, setUser] = useState([]);
   const { id } = useParams();
 
@@ -24,9 +24,9 @@ export default function UpdatedCourse({ context }) {
         if (response.status === 200) {
           const json = await response.json();
           setCourse(json.course);
-          setTitle(json.title)
+          setTitle(json.title);
           setDescription(json.description);
-          setMaterialsNeeded(json.materialsNeeded)
+          setMaterialsNeeded(json.materialsNeeded);
           setEstimatedTime(json.estimatedTime);
           setUser(json.User);
         } else if (response.status === 500) {
@@ -48,12 +48,12 @@ export default function UpdatedCourse({ context }) {
       title,
       description,
       materialsNeeded,
-      
+
       userId: context.authUser.id,
     };
 
     const body = JSON.stringify(updatedCourse);
-  
+
     fetch(`http://localhost:5000/api/courses/${id}`, {
       method: "PUT",
       headers: {
@@ -61,9 +61,7 @@ export default function UpdatedCourse({ context }) {
         Authorization:
           "Basic " +
           Buffer.from(
-            `${context.authUser.emailAddress}:${
-              context.authUser.password
-            }`
+            `${context.authUser.emailAddress}:${context.authUser.password}`
           ).toString("base64"),
       },
       body: body,
@@ -72,7 +70,7 @@ export default function UpdatedCourse({ context }) {
         history.push(`/courses`);
       } else if (response.status === 400) {
         return response.json().then((data) => {
-          return data.errors;
+          setErrors(data.errors);
         });
       } else {
         throw new Error();
@@ -80,13 +78,12 @@ export default function UpdatedCourse({ context }) {
     });
   }
 
-
   function change(event) {
     const name = event.target.name;
     const value = event.target.value;
     if (name === "courseTitle") {
       // setCourse(value);
-      setTitle(value)
+      setTitle(value);
     } else if (name === "courseDescription") {
       setDescription(value);
     } else if (name === "materialsNeeded") {
@@ -97,73 +94,69 @@ export default function UpdatedCourse({ context }) {
       return;
     }
   }
-      return (
+  return (
     <main>
       {/* {user && user.id === context.authUser.id ? ( */}
-        <React.Fragment>
-          <div className="wrap">
-            <h2>Update Course</h2>
-            <Form
-              cancel={cancel}
-              errors={errors}
-              submit={submit}
-              submitButtonText="Update Course"
-              elements={() => (
-                <React.Fragment>
-                  <div className="main--flex">
-                    <div>
-                      <label htmlFor="courseTitle">Course Title</label>
-                      <input
-                        id="courseTitle"
-                        name="courseTitle"
-                        type="text"
-                        value={title}
-                        onChange={change}
-                      />
-                      {/* {user && ( */}
-                        <p>
-                        By {user.firstName} 
-                        </p>
-                      {/* )} */}
-                      <label htmlFor="courseDescription">
-                        Course Description
-                      </label>
-                      <textarea
-                        id="courseDescription"
-                        name="courseDescription"
-                        value={description}
-                        onChange={change}
-                      ></textarea>
-                    </div>
-
-                    <div>
-                      <label htmlFor="materialsNeeded">Materials Needed</label>
-                      <textarea
-                        id="materialsNeeded"
-                        name="materialsNeeded"
-                        value={materialsNeeded}
-                        onChange={change}
-                      ></textarea>
-                    </div>
+      <React.Fragment>
+        <div className="wrap">
+          <h2>Update Course</h2>
+          <Form
+            cancel={cancel}
+            errors={errors}
+            submit={submit}
+            submitButtonText="Update Course"
+            elements={() => (
+              <React.Fragment>
+                <div className="main--flex">
+                  <div>
+                    <label htmlFor="courseTitle">Course Title</label>
+                    <input
+                      id="courseTitle"
+                      name="courseTitle"
+                      type="text"
+                      value={title}
+                      onChange={change}
+                    />
+                    {/* {user && ( */}
+                    <p>By {user.firstName}</p>
+                    {/* )} */}
+                    <label htmlFor="courseDescription">
+                      Course Description
+                    </label>
+                    <textarea
+                      id="courseDescription"
+                      name="courseDescription"
+                      value={description}
+                      onChange={change}
+                    ></textarea>
                   </div>
-                  <label htmlFor="estimatedTime">Estimated Time</label>
-                  <input
-                    id="estimatedTime"
-                    name="estimatedTime"
-                    type="text"
-                    value={estimatedTime}
-                    onChange={change}
-                  />
-                </React.Fragment>
-              )
-              }
-            />
-          </div>
-        </React.Fragment>
+
+                  <div>
+                    <label htmlFor="estimatedTime">Estimated Time</label>
+                    <input
+                      id="estimatedTime"
+                      name="estimatedTime"
+                      type="text"
+                      value={estimatedTime}
+                      onChange={change}
+                    />
+                    <label htmlFor="materialsNeeded">Materials Needed</label>
+                    <textarea
+                      id="materialsNeeded"
+                      name="materialsNeeded"
+                      value={materialsNeeded}
+                      onChange={change}
+                    ></textarea>
+                  </div>
+                </div>
+              </React.Fragment>
+            )}
+          />
+        </div>
+      </React.Fragment>
     </main>
   );
 }
-
 
 // ___________________________________________________________________
 // CODE BELOW IS FOR FUTURE REFERENCE. WANT TO UPDATE AND SIMPLIFY CODE STRUCTURING.
@@ -241,7 +234,7 @@ export default function UpdatedCourse({ context }) {
 //     .then(res => { console.log(res.data);})
 //     .catch(() => { history.push("/") })
 //   }
-//   const cancel = () => { 
+//   const cancel = () => {
 //     history.push('/')
 //   }
 
@@ -277,12 +270,12 @@ export default function UpdatedCourse({ context }) {
 //       title,
 //       description,
 //       materialsNeeded,
-      
+
 //       userId: context.authUser.id,
 //     };
 
 //     const body = JSON.stringify(updatedCourse);
-  
+
 //     fetch(`http://localhost:5000/api/courses/${id}`, {
 //       method: "PUT",
 //       headers: {
@@ -308,7 +301,6 @@ export default function UpdatedCourse({ context }) {
 //       }
 //     });
 //   }
-
 
 //   const change = (event) => {
 //     const name = event.target.name;
