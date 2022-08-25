@@ -166,9 +166,9 @@ export default function UpdatedCourse({ context }) {
 
 
 // ___________________________________________________________________
+// CODE BELOW IS FOR FUTURE REFERENCE. WANT TO UPDATE AND SIMPLIFY CODE STRUCTURING.
 
-
-// refacroted code using:
+// refactored code using:
 //  https://teamtreehouse.com/library/solution-part-2-usestate-and-usehistory
 
 // // This component provides the "Update Course" screen by rendering a form that allows a user to update one of their existing courses.
